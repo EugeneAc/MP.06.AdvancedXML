@@ -17,19 +17,42 @@ namespace XMLSchema.Test
 		[TestMethod]
 		public void PositiveTestSchema()
 		{
-			Assert.IsTrue(_xmlChecker.FindBadLine(@"..\..\..\MP.06.AdvancedXML\Books.xml")==0);
+		    var badlinenumber = _xmlChecker.FindBadLine(@"..\..\..\MP.06.AdvancedXML\Books.xml");
+		    var message = "Test OK";
+		    if (badlinenumber != 0)
+		    {
+		        message = "Bad input xml, line № " + badlinenumber;
+		    }
+
+            Assert.IsTrue(badlinenumber == 0, message);
 		}
 
 		[TestMethod]
 		public void NegativeTestBadISBN()
 		{
-			Assert.IsTrue(_xmlChecker.FindBadLine(@"bookBadIsbn.xml") == 4);
+		    var badlinenumber = _xmlChecker.FindBadLine(@"bookBadIsbn.xml");
+            Assert.IsTrue(badlinenumber == 4);
 		}
 
 		[TestMethod]
 		public void NegativeTestBadGenre()
 		{
-			Assert.IsTrue(_xmlChecker.FindBadLine(@"bookBadGenre.xml") == 7);
+		    var badlinenumber = _xmlChecker.FindBadLine(@"bookBadGenre.xml");
+            Assert.IsTrue(badlinenumber == 7);
 		}
-	}
+
+	    [TestMethod]
+	    public void NegativeTestBadDate()
+	    {
+	        var badlinenumber = _xmlChecker.FindBadLine(@"booksBadDate.xml");
+            Assert.IsTrue(badlinenumber == 9);
+	    }
+
+	    [TestMethod]
+	    public void NegativeTestBadUniqness()
+	    {
+            var badlinenumber = _xmlChecker.FindBadLine(@"booksBadUniq.xml");
+            Assert.IsTrue(badlinenumber == 17);
+	    }
+    }
 }

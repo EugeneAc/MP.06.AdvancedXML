@@ -64,6 +64,12 @@
     <Content Include="bookBadIsbn.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="booksBadDate.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="booksBadUniq.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MP.06.AdvancedXML\MP.06.AdvancedXML.csproj">

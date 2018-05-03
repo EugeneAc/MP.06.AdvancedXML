@@ -20,9 +20,10 @@ namespace MP._06.AdvancedXML
 
 		public void TransformXmlFile (string xmlFilePath, string outFilePath)
 		{
-			StreamWriter writer = File.CreateText(outFilePath);
-			_xsl.Transform(xmlFilePath, null, writer);
-			writer.Close();
+		    using (StreamWriter writer = File.CreateText(outFilePath))
+		    {
+		        _xsl.Transform(xmlFilePath, null, writer);
+            }
 		}
 	}
 }

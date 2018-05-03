@@ -43,7 +43,7 @@ namespace XMLSchema.Test
 					if (reader.Name=="link")
 					{
 						reader.Read(); // go to element value
-						Assert.IsTrue(reader.Value.StartsWith(@"http://my.safaribooksonline.com/"));
+						Assert.IsTrue(reader.Value.StartsWith(@"http://my.safaribooksonline.com/") || reader.Value.StartsWith(@"http://library.by/catalog"));
 						reader.Read(); // exit element
 					}
 				}

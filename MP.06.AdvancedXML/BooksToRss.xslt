@@ -11,7 +11,7 @@
     <![CDATA[  
     public string BuildLink(string genre, string isbn) 
     {
-    if (genre == "Computer")
+    if (genre == "Computer" && !String.IsNullOrEmpty(isbn))
       return @"http://my.safaribooksonline.com/" + isbn.Replace("-","") ;
     return "";
     }]]>  
@@ -24,28 +24,34 @@
         <xsl:text>&#xa;</xsl:text>
         <title>My book catalog RSS</title>
         <xsl:text>&#xa;</xsl:text>
-        <link>
-            <xsl:variable name="genre" select="x:catalog/x:book/x:genre" />
-            <xsl:variable name="isbn" select="x:catalog/x:book/x:isbn" />
-            <xsl:value-of select="user:BuildLink($genre, $isbn)"/>
-          </link>
+        <link>http://library.by/catalog</link>
         <xsl:text>&#xa;</xsl:text>
-        <description>New book announced</description>
+        <description>New books announced</description>
         <xsl:text>&#xa;</xsl:text>
-        <item>
-          <xsl:text>&#xa;</xsl:text>
-          <title>
-            <xsl:value-of select="x:catalog/x:book/x:title"/>
-          </title>
-          <xsl:text>&#xa;</xsl:text>
-          <description>
-            <xsl:value-of select="x:catalog/x:book/x:description"/>
-          </description>
-          <xsl:text>&#xa;</xsl:text>
-        </item>
+        <xsl:apply-templates />
         <xsl:text>&#xa;</xsl:text>
       </channel>
     </rss>
     <xsl:text>&#xa;</xsl:text>
+  </xsl:template>
+
+  <xsl:template match="x:book">
+    <item>
+      <xsl:text>&#xa;</xsl:text>
+      <title>
+        <xsl:value-of select="x:title"/>
+      </title>
+      <link>
+        <xsl:variable name="genre" select="x:genre" />
+        <xsl:variable name="isbn" select="x:isbn" />
+        <xsl:value-of select="user:BuildLink($genre, $isbn)"/>
+      </link>
+      <xsl:text>&#xa;</xsl:text>
+      <description>
+        <xsl:value-of select="x:description"/>
+      </description>
+      <xsl:text>&#xa;</xsl:text>
+      
+    </item>
   </xsl:template>
 </xsl:stylesheet>
